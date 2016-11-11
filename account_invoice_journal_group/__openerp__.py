@@ -19,24 +19,27 @@
 #
 ##############################################################################
 {
-    'name': 'Account Invoice Pricelist Discount',
+    "name": "Group by Journal on Invoices",
     'version': '9.0.1.0.0',
-    'description': """
-Account Invoice Pricelist Discount
-==================================
-""",
-    'category': 'Account',
+    'category': 'Accounting',
+    'sequence': 14,
+    'summary': 'Quotations, Sales Orders, Invoicing',
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',
+    'images': [
+    ],
     'depends': [
         'account',
     ],
     'data': [
-        'views/invoice_view.xml',
-        ],
-    'demo_xml': [],
-    'test': [],
-    'installable': False,
+        'invoice_view.xml',
+    ],
+    'demo': [
+    ],
+    'test': [
+    ],
+    'installable': True,
+    'auto_install': False,
+    'application': True,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

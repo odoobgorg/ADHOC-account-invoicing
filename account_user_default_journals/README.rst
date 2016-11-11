@@ -2,37 +2,45 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==============================
-Account Invioce Journal Filter
-==============================
+=======================================
+Set default invoicing journal for users
+=======================================
 
-This module adds possibility of filtering by journal on invoices.
+It gives the possibility to set default invoicing journal for users.
+From v9 it does not make muche scense as you are supose to choose journal first
 
 Installation
 ============
 
 To install this module, you need to:
 
+#. Just install this module
 
 Configuration
 =============
 
 To configure this module, you need to:
 
+#. Go to users and set default journal to be used for purchase and sale invoices
 
 Usage
 =====
 
 To use this module, you need to:
 
+#. When creating invoices from invoicing menu, this default journals will be used
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.adhoc.com.ar/
 
 .. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
-.. branch is "9.0" for example
+.. branch is "8.0" for example
 
+Known issues / Roadmap
+======================
+
+* ...
 
 Bug Tracker
 ===========
