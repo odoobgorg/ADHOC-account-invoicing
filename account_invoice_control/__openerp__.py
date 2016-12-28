@@ -19,35 +19,21 @@
 #
 ##############################################################################
 {
-    'name': 'Account Invoice Operation',
-    'version': '9.0.1.0.0',
-    'category': 'Accounting & Finance',
-    'sequence': 14,
-    'summary': '',
+    'name': 'Account Invoice Control',
     'author': 'ADHOC SA',
-    'website': 'www.adhoc.com.ar',
+    'version': '9.0.1.1.0',
     'license': 'AGPL-3',
-    'images': [
-    ],
+    'category': 'Accounting & Finance',
     'depends': [
-        'account',
-        # 'web_widget_one2many_tags',
+        'sale',
+        'purchase',
+        'account_invoice_prices_update',
     ],
+    'test': [],
     'data': [
         'security/security.xml',
-        'security/ir.model.access.csv',
-        'wizards/account_invoice_operation_wizard_view.xml',
-        'views/res_partner_view.xml',
-        'views/account_invoice_view.xml',
-        'views/account_invoice_operation_view.xml',
-        'views/account_invoice_plan_view.xml',
+        'views/invoice_view.xml',
     ],
-    'demo': [
-        'demo/account_invoice_plan_demo.xml',
-    ],
-    'test': [
-    ],
+    'website': 'www.adhoc.com.ar',
     'installable': True,
-    'auto_install': False,
-    'application': False,
 }

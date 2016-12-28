@@ -4,7 +4,7 @@
 # directory
 ##############################################################################
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 
 
 class AccountInvoice(models.Model):
@@ -15,19 +15,21 @@ class AccountInvoice(models.Model):
         'Secondary Currency',
         help='If you set a currency here, then this invoice values will be '
         'also stored in the related Account Move Secondary Currency',
-        copy=False,
+        # copy True for compatibility with invoice operation
+        # copy=False,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        )
+    )
     # TODO implement this
     # move_currency_rate = fields.Float(
     move_inverse_currency_rate = fields.Float(
-        copy=False,
+        # copy True for compatibility with invoice operation
+        # copy=False,
         digits=(16, 4),
         string='Account Move Secondary Currency Rate',
         readonly=True,
         states={'draft': [('readonly', False)]},
-        )
+    )
 
     @api.onchange('move_currency_id')
     def change_move_currency(self):
@@ -43,11 +45,11 @@ class AccountInvoice(models.Model):
     def check_move_currency(self):
         if self.move_currency_id:
             if self.move_currency_id == self.currency_id:
-                raise Warning(_(
+                raise ValidationError(_(
                     'Secondary currency can not be the same as Invoice '
                     'Currency'))
             if self.currency_id != self.company_id.currency_id:
-                raise Warning(_(
+                raise ValidationError(_(
                     'Can not use Secondary currency if invoice is in a '
                     'Currency different from Company Currency'))
 
@@ -68,7 +70,7 @@ class AccountInvoice(models.Model):
         if self.move_currency_id:
             for a, b, line in move_lines:
                 if not self.move_inverse_currency_rate:
-                    raise Warning(_(
+                    raise ValidationError(_(
                         'If Secondary currency select you must set rate'))
                 if line['debit']:
                     amount = line['debit']

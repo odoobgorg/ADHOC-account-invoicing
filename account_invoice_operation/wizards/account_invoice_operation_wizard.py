@@ -4,6 +4,7 @@
 # directory
 ##############################################################################
 from openerp import models, fields, api
+from openerp.exceptions import ValidationError
 
 
 class account_invoice_operation_wizard(models.TransientModel):
@@ -44,7 +45,7 @@ class account_invoice_operation_wizard(models.TransientModel):
             elif model == 'sale.order':
                 types = ['sale', False]
             else:
-                raise Warning(
+                raise ValidationError(
                     'Invoice operation with active_model %s not implemented '
                     'yet' % self.model)
             self.plan_id = self.env['account.invoice.plan'].search(
@@ -64,7 +65,8 @@ class account_invoice_operation_wizard(models.TransientModel):
             return True
         record = self.env[model].browse(res_id)
         record.plan_id = self.plan_id.id
-        record.change_plan()
+        # por el problema de la v9 se ejecuta con el constrains
+        # record.change_plan()
         if model == 'account.invoice' and self._context.get(
                 'load_and_run', False):
             # if we dont invalidate cache it dont works ok

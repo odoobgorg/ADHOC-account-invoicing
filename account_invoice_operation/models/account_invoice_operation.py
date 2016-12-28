@@ -4,7 +4,6 @@
 # directory
 ##############################################################################
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
 
 
 class AccountInvoiceOperation(models.Model):
@@ -42,7 +41,7 @@ class AccountInvoiceOperation(models.Model):
     #     other_currency = (
     #         self.journal_id.currency or self.company_id.currency_id)
     #     if other_currency and self.invoice_id.currency_id != other_currency:
-    #         raise Warning(_(
+    #         raise ValidationError(_(
     #             'You can not use a journal or company of different currency '
     #             'than invoice currency yet. Operation "%s"') % (
     #                 self.display_name))
@@ -67,11 +66,12 @@ class AccountInvoiceOperation(models.Model):
                 display_name += "%s%%" % operation.percentage
             else:
                 display_name += _("Balance")
-            if operation.date:
-                display_name += " - %s" % operation.date
-            elif operation.days2 and operation.days:
-                display_name += _(" - Days: %s/%s") % (
-                    operation.days, operation.days2)
+            if operation.change_date:
+                if operation.date:
+                    display_name += " - %s" % operation.date
+                else:
+                    display_name += _(" - Days: %s/%s") % (
+                        operation.days, operation.days2)
             if operation.journal_id:
                 display_name += " - %s" % operation.journal_id.name
             elif operation.company_id:
